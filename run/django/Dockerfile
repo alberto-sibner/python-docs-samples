@@ -22,7 +22,11 @@ WORKDIR $APP_HOME
 # Removes output stream buffering, allowing for more efficient logging
 ENV PYTHONUNBUFFERED 1
 
-# Install dependencies
+# mysqlclient depencencies (need to be installed before requirements.txt)
+# https://pypi.org/project/mysqlclient/
+RUN apt-get update; apt-get install -y default-libmysqlclient-dev build-essential
+
+# Install requirements.txt dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
